@@ -37,12 +37,12 @@ export class BejelentesekComponent implements OnInit {
     this.api
       .getBejelentesek()
       .snapshotChanges()
-      .subscribe( bejelentesek => {
+      .subscribe(bejelentesek => {
         this.Data = [];
-        bejelentesek.forEach( jelentes => {
+        bejelentesek.forEach(jelentes => {
           let a = jelentes.payload.toJSON();
           const b = a as Bejelentes;
-          b.$key= jelentes.key ? jelentes.key : "";
+          b.$key = jelentes.key ? jelentes.key : "";
           this.Data.push(b);
         });
         this.dataSource = new MatTableDataSource(this.Data);
@@ -51,14 +51,19 @@ export class BejelentesekComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
         }, 0);
       })
-   }
+  }
 
-   deleteBejelentes(index: number, e: Bejelentes) {
+  deleteBejelentes(index: number, e: Bejelentes) {
     if (window.confirm('Biztosan törölni szeretné a bejelentést?')) {
       if (e.$key) {
         this.api.deleteBejelentes(e.$key);
       }
     }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnInit(): void {

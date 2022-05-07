@@ -9,8 +9,8 @@
           <button mat-raised-button color="primary" routerLink ="/register" routerLinkActive="active">Regisztráció</button>
         </ng-template>
         <ng-container *ngIf="isAuthenticated()">        
-          <button mat-raised-button color="primary" routerLink ="/add-bejelentes" routerLinkActive="active">Uj bejelentes</button>
-          <button mat-raised-button color="primary" routerLink ="/bejelentesek" routerLinkActive="active">Bejelentesek</button>
+          <button mat-raised-button color="primary" routerLink ="/add-bejelentes" routerLinkActive="active">Új bejelentés</button>
+          <button mat-raised-button color="primary" routerLink ="/bejelentesek" routerLinkActive="active">Bejelentések</button>
           <button mat-raised-button color="primary" (click)="logOut()" >Kijelentkezés</button>
         </ng-container>
       </div>

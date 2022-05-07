@@ -17,52 +17,56 @@
         <div class="controlers-wrapper">
           <!-- Nev -->
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Hiba megnevezese" formControlName="nev" />
+            <input matInput placeholder="Hiba megnevezése" formControlName="nev" [readonly]="readOnly" />
             <mat-error *ngIf="handleError('nev', 'required')">
-              Kerem toltse ki a<strong>hiba megnevezese</strong> mezot
+              Kérem töltse ki a <strong>hiba megnevezése</strong> mezőt!
             </mat-error>
           </mat-form-field>
   
           <!-- Leiras -->
           <mat-form-field class="example-full-width">
             <textarea matInput
+              [readonly]="readOnly"
               formControlName="leiras" 
-              placeholder="A hiba leirasa"
+              placeholder="A hiba leírása"
               cdkTextareaAutosize
               #autosize="cdkTextareaAutosize"
               cdkAutosizeMinRows="1"
               cdkAutosizeMaxRows="10">
             </textarea>
             <mat-error *ngIf="handleError('leiras', 'required')">
-              You must provide a <strong>10 digit ISBN</strong>
+              Kérem töltse ki a <strong>hiba leírása</strong>
             </mat-error>
           </mat-form-field>
   
           <!--Datum -->
           <mat-form-field>
             <input
+              [readonly]="readOnly"
               matInput
               readonly
               [matDatepicker]="picker"
-              placeholder="Meghibasodas ideje"
+              placeholder="Meghibásodás ideje"
               formControlName="datum"
               (dateChange)="formatDate($event)"
             />
             <mat-datepicker-toggle
+              [disabled]="readOnly"
               matSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="handleError('datum', 'required')">
-              Datum is required
+              A dátum kötelező!
             </mat-error>
           </mat-form-field>
 
           <!-- Keszulek tipus -->
           <mat-form-field>
-            <mat-label>Keszulek tipus</mat-label>
+            <mat-label>Készulek típus</mat-label>
             <mat-select formControlName="tipus">
               <mat-option
+                [disabled]="readOnly"
                 [value]="btipus"
                 *ngFor="let btipus of bejelentesTipus"
                 >{{ btipus }}</mat-option
@@ -83,16 +87,17 @@
           <!-- Prioritas -->
           <div class="misc-bottom-padding">
            
-            <mat-label>Prioritas: </mat-label>
+            <mat-label>Prioritás: </mat-label>
               <mat-radio-group
+                [disabled]="readOnly"
                 aria-label="Select an option"
                 formControlName="prioritas"
                 class="example-radio-group"
               >
               
-                <mat-radio-button class="example-radio-button" value="Eletbevago">Eletbevago</mat-radio-button>
-                <mat-radio-button class="example-radio-button" value="Surgos">Surgos</mat-radio-button>
-                <mat-radio-button class="example-radio-button" value="Kevesbe_surgos">Kevesbe surgos</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Életbevágó">Életbevágó</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Sürgős">Sürgős</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Kevésbé_sürgős">Kevésbé_sürgős</mat-radio-button>
                
               </mat-radio-group>
             <!-- </mat-form-field> -->
@@ -101,8 +106,9 @@
           <!-- Leiras -->
           <mat-form-field class="example-full-width">
             <textarea matInput
+              [readonly]="readOnly"
               formControlName="egyeb"
-              placeholder="Egyebb megjegyzes"
+              placeholder="Egyébb megjegyzés"
               cdkTextareaAutosize
               #autosize="cdkTextareaAutosize"
               cdkAutosizeMinRows="1"
@@ -114,14 +120,17 @@
       </mat-card>
   
       <!-- Submit & Reset -->
-      <mat-card>
-        <div class="full-wrapper button-wrapper">
+      <mat-card style="text-align: right">
+        <div class="full-wrapper button-wrapper" *ngIf="!readOnly">
           <div class="button-wrapper">        
-            <button type="reset" mat-flat-button color="war" (click)="onReset()">
-              Megse
+            <button type="reset" mat-flat-button color="warn" (click)="onReset()">
+              Mégsem
             </button>
-            <button mat-flat-button color="warn">Feltolt</button>
+            <button mat-flat-button color="primary">Feltölt</button>
           </div>
+        </div>
+        <div class="full-wrapper button-wrapper" *ngIf="readOnly">
+          <button mat-flat-button color="primary" (click)="goBack()">Vissza</button>
         </div>
       </mat-card>
     </form>

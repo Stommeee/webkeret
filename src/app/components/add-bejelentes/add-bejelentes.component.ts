@@ -15,22 +15,26 @@ export class AddBejelentesComponent implements OnInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   id: string = "";
-  title = "Uj bejelentés";
+  readOnly = false;
+
+  title = "Új bejelentés";
   bForm: FormGroup = this.fb.group({
     nev: ['', [Validators.required]],
     tipus: ['', [Validators.required]],
     leiras: ['', [Validators.required]],
     datum: ['', [Validators.required]],
-    prioritas: ['Kevesbe_surgos', [Validators.required]],
+    prioritas: ['Kevésbé_sürgős', [Validators.required]],
     egyeb: ['']
   });
 
   bejelentesTipus: string[] = [
-    'Televizio',
+    'Televízió',
     'Telefon',
-    'Mosogep',
-    'Szamitogep',
-    'Kegkondi',
+    'Mosógép',
+    'Számítógép',
+    'Légkondicionáló',
+    'Hűtő',
+    'Villany tűzhely'
   ];
   
 
@@ -42,6 +46,8 @@ export class AddBejelentesComponent implements OnInit {
     private actRoute: ActivatedRoute
     ) {
       const idParam = this.actRoute.snapshot.paramMap.get('id');
+      const readOnlyParam = this.actRoute.snapshot.queryParamMap.get('view');
+      this.readOnly = readOnlyParam == 'true' ? true : false;
       this.id = idParam ? idParam : "";
       if (this.id) {
         this.title = "Bejelentés módosítása";
@@ -84,10 +90,14 @@ export class AddBejelentesComponent implements OnInit {
   }
 
   onReset() {
-    this.bForm.reset({prioritas:'Kevesbe_surgos'});
+    this.bForm.reset({prioritas:'Kevésbé_sürgős'});
     Object.keys(this.bForm.controls).forEach((key) => {
       this.bForm.controls[key].setErrors(null);
     });
+  }
+
+  goBack() {
+    this.router.navigate(['bejelentesek']);
   }
 
   triggerResize() {
