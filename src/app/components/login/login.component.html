@@ -1,0 +1,29 @@
+<form>
+	<div class="login-container">
+		<div class="login-content">
+			<mat-toolbar class="login-toolbar" color="primary">BEJELENTKEZÉS</mat-toolbar>
+			<mat-card>
+				<form [formGroup]="loginForm" #formDirective="ngForm" (ngSubmit)="onSubmit(loginForm, formDirective)" >
+					<mat-form-field>
+						<mat-icon matPrefix>person_outline</mat-icon>
+						<input autofocus type="text" matInput placeholder="Felhasználónév" formControlName="email">
+					</mat-form-field>
+
+					<mat-form-field>
+						<mat-icon matPrefix>lock_outline</mat-icon>
+						<input type="password" autocomplete="false" matInput placeholder="Jelszó"  formControlName="password">
+					</mat-form-field>
+
+					<button type="submit" mat-raised-button color="primary">BEJELENTKEZEM</button>
+                </form>
+					<mat-toolbar class="login-toolbar" style="background-color:white">Bejelentkezés a következővel:</mat-toolbar>
+					<div class="socialMediaFlex">
+						<!-- <button mat-fab color="primary"><i class="fab fa-facebook-f"></i></button> -->
+						<button mat-fab color="accent" (click)="onGoogleClick()"><i class="fab fa-google"></i></button>
+					</div>
+          <br>
+          <div class="text-center"> <a routerLink ='/forgot-password'>Elfelejtettem a jelszavam</a></div>
+          <div> Ha még nincs fiókod, kattints ide: <a routerLink ='/register'>REGISZTRÁLÁS</a></div>
+			</mat-card>
+		</div>
+	</div>

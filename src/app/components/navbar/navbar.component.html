@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row > <span>Elektronika szakszervíz</span></mat-toolbar-row>
+   
+    <mat-toolbar-row > 
+         <span class="spacer"></span>
+      <div>
+        <ng-template [ngIf] = "!authService.isAunthenticated()">  
+          <button mat-raised-button color="primary" routerLink ="/login" routerLinkActive="active" >Bejelntkezés</button>
+          <button mat-raised-button color="primary" routerLink ="/register" routerLinkActive="active">Regisztráció</button>
+        </ng-template>
+        <ng-container *ngIf="isAuthenticated()">        
+          <button mat-raised-button color="primary" routerLink ="/add-bejelentes" routerLinkActive="active">Uj bejelentes</button>
+          <button mat-raised-button color="primary" routerLink ="/bejelentesek" routerLinkActive="active">Bejelentesek</button>
+          <button mat-raised-button color="primary" (click)="logOut()" >Kijelentkezés</button>
+        </ng-container>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>

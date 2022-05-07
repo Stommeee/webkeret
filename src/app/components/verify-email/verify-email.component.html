@@ -1,0 +1,31 @@
+<div class="displayTable">
+  <div class="displayTableCell">
+    <div class="authBlock">
+      <h3 style="text-align: center;">Köszönjük a regisztrálást!</h3>
+
+      <div class="formGroup" *ngIf="authService.userData as user">
+        <p class="text-center">
+          Megerősítő e-mailt küldtünk a következőre: <strong>{{ user.email }}</strong
+          >.
+        </p>
+        <p class="text-center">
+          Kérjük, ellenőrizze e-mailjeit, és kattintson a linkre az e-mail-cím megerősítéséhez.
+        </p>
+      </div>
+
+      <!-- Calling SendVerificationMail() method using authService Api -->
+      <div class="formGroup text-center">
+        <button
+          type="button"
+          class="btn btnPrimary"
+          (click)="authService.SendVerificationMail()"
+        >
+          <i class="fas fa-redo-alt"></i>
+          Megerősítő e-mail újraküldése
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</div>
