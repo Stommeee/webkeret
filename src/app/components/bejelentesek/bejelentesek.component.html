@@ -7,17 +7,17 @@
 <p *ngIf="Data.length <= 0" class="no-data">Egyelőre nincs adat!</p>
 
 <!-- Filter -->
-<div class="container">
-  <div class="mat-elevation-z8">
-    <mat-form-field appearance="standard" style="padding-left: 24px; width: 50%">
+<!-- <div class="container">
+  <div class="mat-elevation-z8"> -->
+    <mat-form-field appearance="standard" style="padding-left: 12px; width: 50%">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)"  #input>
     </mat-form-field>
-  </div>
-</div>
+  <!-- </div>
+</div> -->
 
 <!-- Angular material data table -->
-<div class="container" *ngIf="Data.length > 0">
+<div class="table-responsive" *ngIf="Data.length > 0">
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="nev">
